@@ -1,10 +1,11 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const config = require('./utils/config')
-const middleware = require('./utils/middleware')
-const mongoose = require('mongoose')
-const logger = require('./utils/logger')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const config = require('./utils/config');
+const middleware = require('./utils/middleware');
+const mongoose = require('mongoose');
+const logger = require('./utils/logger');
+const clientRouter = require('./controllers/clients');
 
 
 
@@ -16,22 +17,22 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
     logger.info('Connected to MongoDB')
   })
   .catch((error) => {
-    logger.error('Error connecting to MongoDB:', error.message)
-  })
+    logger.error('Error connecting to MongoDB:', error.message);
+  });
 
 
 // MIDDLEWARE
-app.use(cors())
-app.use(express.static('build'))
-app.use(express.json())
-app.use(middleware.requestLogger)
+app.use(cors());
+app.use(express.static('build'));
+app.use(express.json());
+app.use(middleware.requestLogger);
 
 // ROUTES
 
-
+app.use('/api/clients', clientRouter);
 
 // ERRORS
-app.use(middleware.unknownEndpoint)
-app.use(middleware.errorHandler)
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
 
-module.exports = app
+module.exports = app;
