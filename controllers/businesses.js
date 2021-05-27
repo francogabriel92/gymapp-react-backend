@@ -1,4 +1,4 @@
-const businessRouter = require('express');
+const businessRouter = require('express').Router();
 const Business = require('../models/business');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -15,11 +15,11 @@ businessRouter.get('/', async (req, res, next) => {
 
 businessRouter.post('/', async (req, res, next) => {
   try {
-    const newBusiness = {
-      username = req.body.username,
-      passwordHash = await bcrypt.hash(req.body.password, saltRounds),
+    const newBusiness = new Business({
+      username : req.body.username,
+      passwordHash : await bcrypt.hash(req.body.password, saltRounds),
       name: req.body.name
-    };
+    });
     const savedBusiness = await newBusiness.save();
     res.status(200).json(savedBusiness);
   }
@@ -40,3 +40,5 @@ businessRouter.put('/password', async (req, res, next) => {
     next(error);
   };
 }); 
+
+module.exports = businessRouter;
