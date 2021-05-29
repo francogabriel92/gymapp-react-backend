@@ -4,18 +4,14 @@ const clientSchema = mongoose.Schema({
   name: String,
   mail: String,
   age: Number,
-  business: [
-    {
+  business: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Business'
-    }
-  ],
-  trainer: [
-    {
+  },
+  trainer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Trainer'
-    }
-  ]
+  }
 });
 
 clientSchema.set('toJSON', {

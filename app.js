@@ -25,13 +25,13 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
-app.use(middleware.getToken)
+//app.use(middleware.getToken)
 app.use(middleware.requestLogger);
 
 // ROUTES
 
 app.use('/api/login', loginRouter);
-app.use('/api/clients',clientRouter);
+app.use('/api/clients', middleware.getToken ,clientRouter);
 app.use('/api/business', businessRouter);
 
 // ERRORS
