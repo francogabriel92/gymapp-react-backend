@@ -1,9 +1,20 @@
 const mongoose = require('mongoose');
 
 const clientSchema = mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   mail: String,
   age: Number,
+  address: String,
+  phone: String,
+  birthDate: Date,
+  city: String,
+  gender: {
+    type: String,
+    required: true
+  },
   business: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Business'

@@ -35,7 +35,11 @@ clientRouter.post('/', async (req, res, next) => {
     const newClient = new Client({
       name: body.name,
       mail: body.mail,
-      age: body.age,
+      birthDate: body.age,
+      phone: body.phone,
+      address: body.address,
+      city: body.city,
+      gender: body.gender,
       business: decodedToken.id,
       trainer: body.trainer
     });
@@ -43,7 +47,6 @@ clientRouter.post('/', async (req, res, next) => {
     res.status(200).json(savedClient);
   }
   catch (error) {
-    console.log(error);
     next(error)
   };
 });
