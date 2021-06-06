@@ -7,6 +7,7 @@ const config = require('../utils/config');
 
 loginRouter.post('/', async ( req, res, next ) => {
   const body = req.body;
+  console.log(body);
   try {
     const user = await User.findOne({ username: body.username });
     const passwordCorrect = user === null
@@ -19,15 +20,24 @@ loginRouter.post('/', async ( req, res, next ) => {
       username: user.username,
       id: user._id
     };
-
-    const token = jwt.sign(
-      userForToken,
-      config.TOKEN,
-      { expiresIn: 60*60 }
-      );
-    res
-      .status(200)
-      .send({ token, name: user.name });
+    if(remember){
+      const token = jwt.sign(
+        userForToken,
+        config.TOKEN
+        );
+      res
+        .status(200)
+        .send({ token, name: user.name });
+    } else {
+      const token = jwt.sign(
+        userForToken,
+        config.TOKEN,
+        { expiresIn: 60*60 }
+        );
+      res
+        .status(200)
+        .send({ token, name: user.name });
+    };
   }
   catch (err) {
     next(err);
