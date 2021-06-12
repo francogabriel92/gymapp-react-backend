@@ -1,7 +1,7 @@
 const clientRouter = require('express').Router();
 const Client = require('../models/client');
 const jwt = require('jsonwebtoken');
-const config = require('../utils/config')
+const config = require('../utils/config');
 
 // GET REQUESTS
 
@@ -30,8 +30,16 @@ clientRouter.get('/', async (req, res, next) => {
 
 clientRouter.post('/', async (req, res, next) => {
   const body = req.body;
+  let endDate;
   try{
     const decodedToken = await jwt.verify(req.token, config.TOKEN);
+    if(body.subType === 'months') {
+      endDate = new Date();
+      endDate.setMonth(endDate.getMonth()+body.subQty);
+    } else if (body.subType === 'days') {
+      endDate = new Date();
+      endDate.setDate(endDate.getDate()+body.subQty);
+    }
     const newClient = new Client({
       name: body.name,
       mail: body.mail,
@@ -39,6 +47,7 @@ clientRouter.post('/', async (req, res, next) => {
       phone: body.phone,
       address: body.address,
       city: body.city,
+      subEndDate: endDate,
       gender: body.gender,
       business: decodedToken.id,
       trainer: body.trainer
@@ -57,7 +66,6 @@ clientRouter.put('/:id', async (req, res, next) => {
   const update = req.body
   try {
     const clientToUpdate = await Client.findById(req.params.id);
-    console.log(clientToUpdate);
     const decodedToken = await jwt.verify(req.token, config.TOKEN);
     if (clientToUpdate.business.toString() === decodedToken.id) {
       const updatedClient = await Client.findByIdAndUpdate(clientToUpdate.id,update, { new: true });
@@ -71,6 +79,25 @@ clientRouter.put('/:id', async (req, res, next) => {
   }
 });
 
+clientRouter.put('/addtime/:id', async (req, res, next) => {
+  const body = req.body;
+  try{
+    const decodedToken = await jwt.verify(req.token, config.TOKEN);
+    const clientToUpdate = await Client.findById(req.params.id);
+    let endDate = new Date(clientToUpdate.subEndDate);
+    console.log(endDate);
+    if(body.subType === 'months') {
+      endDate = new Date();
+      endDate.setMonth(endDate.getMonth()+body.subQty);
+    } else if (body.subType === 'days') {
+      endDate = new Date();
+      endDate.setDate(endDate.getDate()+body.subQty);
+    }
+  }
+  catch (error) {
+    next(error);
+  }
+});
 
 // DELETE REQUESTS
 
