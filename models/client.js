@@ -11,6 +11,10 @@ const clientSchema = mongoose.Schema({
   phone: String,
   birthDate: Date,
   city: String,
+  subEndDate: {
+    type: Date,
+    required: true
+  },
   gender: {
     type: String,
     required: true

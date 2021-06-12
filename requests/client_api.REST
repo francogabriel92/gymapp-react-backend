@@ -1,0 +1,16 @@
+POST http://localhost:3001/api/clients
+Content-Type: application/json
+
+{
+    "name": "Alberto Fernandez",
+    "mail": "carlosmantilla@mail.com",
+    "birthDate": "1992-12-11",
+    "phone": "555-7894",
+    "address": "dasdsa",
+    "city": "asdsadas",
+    "gender": "male",
+    "business": "60afda4a3d426c2708bb0f5c",
+    "subQty": 3,
+    "subType": "months",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZyYW5jbyIsImlkIjoiNjBhZmRhNGEzZDQyNmMyNzA4YmIwZjVjIiwiaWF0IjoxNjIzMDI3MjcwfQ.3XS99cmRTQMv3tF9aS_OyPOOnDlirtCXXuL11cmBzB8"
+}

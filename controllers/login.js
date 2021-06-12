@@ -20,7 +20,7 @@ loginRouter.post('/', async ( req, res, next ) => {
       username: user.username,
       id: user._id
     };
-    if(remember){
+    if(body.remember){
       const token = jwt.sign(
         userForToken,
         config.TOKEN
