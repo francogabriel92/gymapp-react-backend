@@ -81,18 +81,25 @@ clientRouter.put('/:id', async (req, res, next) => {
 
 clientRouter.put('/addtime/:id', async (req, res, next) => {
   const body = req.body;
+  body.subQty = Number(body.subQty)
   try{
-    const decodedToken = await jwt.verify(req.token, config.TOKEN);
     const clientToUpdate = await Client.findById(req.params.id);
+    const decodedToken = await jwt.verify(req.token, config.TOKEN);
+    const currentDate = new Date();
     let endDate = new Date(clientToUpdate.subEndDate);
-    console.log(endDate);
+    (endDate.getTime() < currentDate.getTime()) ? endDate = new Date(currentDate) : endDate;
     if(body.subType === 'months') {
-      endDate = new Date();
-      endDate.setMonth(endDate.getMonth()+body.subQty);
+      endDate.setMonth(endDate.getMonth() + body.subQty);
     } else if (body.subType === 'days') {
-      endDate = new Date();
       endDate.setDate(endDate.getDate()+body.subQty);
-    }
+    };
+    clientToUpdate.subEndDate = endDate;
+    if (clientToUpdate.business.toString() === decodedToken.id) {
+      const updatedClient = await Client.findByIdAndUpdate(clientToUpdate.id, clientToUpdate, { new: true });
+      res.status(200).json(updatedClient);
+    } else {
+      res.status(401).json({ error: 'Not authorized'})
+    };
   }
   catch (error) {
     next(error);
