@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b71c550c.chunk.css",
+    "main.js": "/static/js/main.aca85f40.chunk.js",
+    "main.js.map": "/static/js/main.aca85f40.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0186aa5c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0186aa5c.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.55989acd.chunk.js": "/static/js/2.55989acd.chunk.js",
+    "static/js/2.55989acd.chunk.js.map": "/static/js/2.55989acd.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.b71c550c.chunk.css.map": "/static/css/main.b71c550c.chunk.css.map",
+    "static/js/2.55989acd.chunk.js.LICENSE.txt": "/static/js/2.55989acd.chunk.js.LICENSE.txt",
+    "static/media/carousel-image-1.295f0ba5.webp": "/static/media/carousel-image-1.295f0ba5.webp",
+    "static/media/carousel-image-2.51ae8fc8.webp": "/static/media/carousel-image-2.51ae8fc8.webp"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0186aa5c.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.55989acd.chunk.js",
+    "static/css/main.b71c550c.chunk.css",
+    "static/js/main.aca85f40.chunk.js"
+  ]
+}
